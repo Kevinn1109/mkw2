@@ -510,8 +510,6 @@ void RaceConfig::Scenario::initCompetitionSettings() {
     // so we don't have to do anything for them here. See 80665cd0.
     return;
   } else {
-    settings.objective = missionToCompetitionObjectives[file->rkco.competitionType];
-    settings.courseId = file->rkco.courseId;
     settings.engineClass = file->rkco.engineClass;
     settings.controllerRestriction = file->rkco.controllerRestriction;
     settings.scoreRequired = file->rkco.score;
