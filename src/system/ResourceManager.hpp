@@ -113,6 +113,13 @@ typedef enum {
   PHANTOM = 0x23
 } VehicleId;
 
+// name of battle mode team
+typedef enum {
+  BATTLE_TEAM_RED = 0,
+  BATTLE_TEAM_BLUE = 1,
+  BATTLE_TEAM_NONE = 2 // not in battle mode
+} BattleTeam;
+
 // single player/number of multiplayer
 typedef enum {
   PLAYER_MODE_FOUR = 0,

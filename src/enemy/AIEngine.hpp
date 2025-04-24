@@ -15,12 +15,12 @@ namespace Enemy {
         u8 field_0x00[0x164];
     };
 
-    struct AIEngineKart: public AIEngine {
+    struct AIEngineKart : public AIEngine {
         AIEngineKart();
         virtual ~AIEngineKart();
     };
 
-    struct AIEngineBike: public AIEngine {
+    struct AIEngineBike : public AIEngine {
         AIEngineBike();
         virtual ~AIEngineBike();
     };

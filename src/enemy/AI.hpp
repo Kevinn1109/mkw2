@@ -7,7 +7,7 @@
 
 namespace Enemy {
 
-    struct AI: public KartObjectProxy {
+    struct AI : public Kart::KartObjectProxy {
         enum eFlags {
             AI_FLAG_BLOCK_LINE = (1 << 0),
             AI_FLAG_LOOK_BACK_WHILE_BLOCKING_LINE = (1 << 2),
