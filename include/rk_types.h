@@ -118,3 +118,10 @@ private:
 #endif // __cplusplus
 
 #define INLINE_ELSEWHERE(x)
+
+// name of battle mode team
+typedef enum {
+  BATTLE_TEAM_RED = 0,
+  BATTLE_TEAM_BLUE = 1,
+  BATTLE_TEAM_NONE = 2 // not in battle mode
+} BattleTeam;
