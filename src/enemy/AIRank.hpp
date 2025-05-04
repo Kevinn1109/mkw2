@@ -6,6 +6,7 @@
 namespace Enemy {
 
     class AIRankGroupBase;
+    class AISpeedBase;
 
     struct AIRank {
         virtual ~AIRank();
@@ -32,11 +33,11 @@ namespace Enemy {
         virtual void addMemeber(AIRank*);
         virtual void initChangeTargetRank();
         virtual void doChangeTargetRank();
-        virtual void field_0x24();
-        virtual void field_0x28();
-        virtual void field_0x2C();
-        virtual void field_0x30();
-        virtual void field_0x34();
+        virtual void vf_0x24();
+        virtual void vf_0x28();
+        virtual void vf_0x2C();
+        virtual void vf_0x30();
+        virtual void vf_0x34();
         
         s32 mNumMembers;
         s32 mStartingRank;

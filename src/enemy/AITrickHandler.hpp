@@ -6,7 +6,7 @@ namespace Enemy {
 
     struct AITrickHandler {
         virtual ~AITrickHandler();
-        virtual void field_0x0C();
+        virtual void vf_0x0C();
         virtual void calc();
         virtual void disableWheelie();
         virtual void update();
@@ -15,7 +15,7 @@ namespace Enemy {
     };
 
     struct AITrickHandlerBike: public AITrickHandler {
-        virtual ~AITrickHandler();
+        virtual ~AITrickHandlerBike();
         void field_0x0C();
         void calc();
         void disableWheelie();
@@ -25,7 +25,7 @@ namespace Enemy {
     };
 
     struct AITrickHandlerBikeUnused: public AITrickHandlerBike {
-        ~AITrickHandler();
+        ~AITrickHandlerBikeUnused();
         void update();
     };
 

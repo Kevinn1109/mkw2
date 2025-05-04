@@ -1,8 +1,11 @@
 #pragma once
 
 #include "AI.hpp"
+#include "AIPath.hpp"
 #include "system/KPadController.hpp"
 #include <rk_types.h>
+
+class AI;
 
 namespace Enemy {
 

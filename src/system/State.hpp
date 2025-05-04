@@ -31,8 +31,8 @@ class StateSequencer {
     public:
         virtual ~StateSequencer();
         virtual void update();
-        virtual void field_0x10();
-        virtual void field_0x14();
+        virtual void vf_0x10();
+        virtual void vf_0x14();
 };
 
 }

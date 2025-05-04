@@ -16,7 +16,7 @@ namespace Enemy {
         virtual void init();
         virtual void update();
         virtual void updateAfterGoal();
-        virtual void field_0x18();
+        virtual void vf_0x18();
 
         AIInfo* mpInfo;
         AIParamSpeed* mpParamSpeed;
@@ -31,7 +31,7 @@ namespace Enemy {
     };
 
     struct AISpeedBossRace: public AISpeedBase {
-        ~AISpeedBattle();
+        ~AISpeedBossRace();
         void init();
         void update();
 

@@ -1,6 +1,11 @@
 #pragma once
 
 #include "AIInfo.hpp"
+#include "AIControl.hpp"
+#include "AISpeed.hpp"
+#include "AIItem.hpp"
+#include "AITrickHandler.hpp"
+#include "AILookAt.hpp"
 #include "system/CourseMap.hpp"
 #include "system/State.hpp"
 #include <rk_types.h>

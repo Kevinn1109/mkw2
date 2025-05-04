@@ -1,6 +1,7 @@
 #pragma once
 
-#include <rk_types.h>
+#include "AIInfo.hpp"
+#include "system/State.hpp"
 
 namespace Enemy {
 
