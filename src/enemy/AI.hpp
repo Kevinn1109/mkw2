@@ -1,9 +1,8 @@
 #pragma once
 
-#include <rk_types.h>
-#include <egg/math/eggVector.hpp>
 #include "AIEngine.hpp"
-#include "../kart/KartObjectProxy.hpp"
+#include "kart/KartObjectProxy.hpp"
+#include <egg/math/eggVector.hpp>
 
 namespace Enemy {
 
@@ -19,22 +18,22 @@ namespace Enemy {
         void init();
         void update();
         const EGG::Vector2f& getStick() const;  
-        s32 isCPU();
-        s32 isRealLocal();
-        s32 isRealLocalAndCPU();
-        s32 isAICPU();
-        s32 isGhost();
-        s32 isSameTeam(const AI&);
+        bool isCPU();
+        bool isRealLocal();
+        bool isRealLocalAndCPU();
+        bool isAICPU();
+        bool isGhost();
+        bool isSameTeam(const AI&);
         void endRace();
         void onOutOfBounds(const System::MapdataJugemPoint&);
         void forceRecalculation(s32);
-        // fn_1_216018
-        s32 isAllWheelsCollision();
-        s32 isOnGround();
-        s32 isDriftingOnGround();
-        s32 isHopping();
-        s32 isAutoDrift();
-        s32 isInBullet();
+        bool fn_1_216018();
+        bool isAllWheelsCollision();
+        bool isOnGround();
+        bool isDriftingOnGround();
+        bool isHopping();
+        bool isAutoDrift();
+        bool isInBullet();
 
         AIEngine* mpEngine;
         EGG::Vector2f mStick;

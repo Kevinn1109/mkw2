@@ -1,28 +1,47 @@
 #pragma once
 
+#include "AIInfo.hpp"
+#include "system/CourseMap.hpp"
+#include "system/State.hpp"
 #include <rk_types.h>
-#include "../system/CourseMap.hpp"
 
 namespace Enemy {
 
-    struct AIEngine {
+    struct AIEngine: public System::StateSequencer {
         AIEngine();
         virtual ~AIEngine();
         virtual void onOutOfBounds(const System::MapdataJugemPoint&);
         void endRace();
         void forceRecalculation(s32);
 
-        u8 field_0x00[0x164];
+        System::State mStateReady;
+        System::State mStateRunCPU;
+        System::State mStateRunHuman;
+        System::State mStateGhostIdle;
+        System::State mStateAfterGoal;  // The racer will keep moving on goal
+        System::State mStateStop;       // Used in Battles and Tournaments. The racer will stop moving on goal
+        AIInfo* mpAIInfo;
+        AIControlBase* mpAIControl;
+        AISpeedBase* mpAISpeed;
+        AIItemBase* mpItem;
+        System::KPadRaceInputState* mInput;
+        AITrickHandler* mpTrickHandler;
+        AILookAt* mpLookAt;
+        s32 field_0x15C;
+        bool mbForceRecalculation;
+        bool mbForcingRecalculation;
+        bool mbDisableForceRecalculation;
+        bool mbMatchEnded;
     };
 
     struct AIEngineKart : public AIEngine {
         AIEngineKart();
-        virtual ~AIEngineKart();
+        ~AIEngineKart();
     };
 
     struct AIEngineBike : public AIEngine {
         AIEngineBike();
-        virtual ~AIEngineBike();
+        ~AIEngineBike();
     };
 
 } // namespace Enemy
