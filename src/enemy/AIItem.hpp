@@ -1,21 +1,21 @@
 #pragma once
 
 #include "AIInfo.hpp"
-#include "system/State.hpp"
+#include "util/State.hpp"
 
 namespace Enemy {
 
-    struct AIItemBase: public System::StateSequencer {
+    struct AIItemBase: public Util::StateSequencer<AIItemBase> {
         virtual ~AIItemBase();
 
-        System::State mStateIdle;
-        System::State mStateStock;
-        System::State mStateThrowDefault;
-        System::State mStateKinoko;
-        System::State mStateThrowFront;
-        System::State mStateThrowBack;
-        System::State mStateHold;
-        System::State mStateGoal;
+        Util::State<AIItemBase> mStateIdle;
+        Util::State<AIItemBase> mStateStock;
+        Util::State<AIItemBase> mStateThrowDefault;
+        Util::State<AIItemBase> mStateKinoko;
+        Util::State<AIItemBase> mStateThrowFront;
+        Util::State<AIItemBase> mStateThrowBack;
+        Util::State<AIItemBase> mStateHold;
+        Util::State<AIItemBase> mStateGoal;
         AIInfo* mpAIInfo;
         s32 mItemHoldState;
         bool mbUseItem;

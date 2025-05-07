@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AIInfo.hpp"
-#include "system/State.hpp"
+#include "util/State.hpp"
 #include <egg/math/eggVector.hpp>
 
 namespace Enemy {
@@ -19,19 +19,20 @@ namespace Enemy {
         f32 field_0x10;
     };
 
-    struct AILookAt: public System::StateSequencer {
+    struct AILookAt: public Util::StateSequencer<AILookAt> {
         virtual ~AILookAt();
+        void registerBump(const EGG::Vector3f&, const AI&);
 
-        System::State mStateRaceStart;
-        System::State mStateIdle;
-        System::State mStateLookBehindOnBlockLine;
-        System::State mStateNearbyPlayer;
-        System::State mStateOvertake;
-        System::State mStateLookBehind;
-        System::State mStateBeingBumped;
-        System::State mStateInkApplied;
-        System::State mStateDontLookAtCamera;
-        System::State mStateLookAtCamera;
+        Util::State<AILookAt> mStateRaceStart;
+        Util::State<AILookAt> mStateIdle;
+        Util::State<AILookAt> mStateLookBehindOnBlockLine;
+        Util::State<AILookAt> mStateNearbyPlayer;
+        Util::State<AILookAt> mStateOvertake;
+        Util::State<AILookAt> mStateLookBehind;
+        Util::State<AILookAt> mStateBeingBumped;
+        Util::State<AILookAt> mStateInkApplied;
+        Util::State<AILookAt> mStateDontLookAtCamera;
+        Util::State<AILookAt> mStateLookAtCamera;
         AIInfo* mpAIInfo;
         AILookAtNextInfo* mpNextInfo;
         AI* mpLookAtTarget;
@@ -40,7 +41,7 @@ namespace Enemy {
         s32 mPlayerLookingAtIdx;
         struct_101* field_0x208;
         bool mbIsBeingBumped;
-        EGG::Vector3f field_0x210;
+        EGG::Vector3f bumpDirection;
     };
 
     struct AILookAtBattle: public AILookAt {

@@ -19,6 +19,7 @@ namespace Enemy {
 
     struct AIPathHandler {
         virtual ~AIPathHandler();
+        void addOffsetRateAndRecalcTargetTrans(f32);
         
         bool mbIsSwitchingPath;
         PointParam* field_0x08;
