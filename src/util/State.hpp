@@ -9,11 +9,11 @@ namespace Util {
     
     template<typename T>
     class StateBase {
-    public:
-        virtual ~StateBase() = 0;
-        virtual void enter(T* obj) = 0;
-        virtual void calc(T* obj) = 0;
-        virtual void leave(T* obj) = 0;
+        public:
+            virtual ~StateBase() = 0;
+            virtual void enter(T* obj) = 0;
+            virtual void calc(T* obj) = 0;
+            virtual void leave(T* obj) = 0;
     };
     
     template<typename T>
@@ -46,7 +46,7 @@ namespace Util {
                 mUpdate = update;
                 mExit = exit;
             }
-        
+
         private:
             StateSequencer<T>* mpStateSequencer;
             StateFunction mInit;

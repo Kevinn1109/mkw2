@@ -15,7 +15,7 @@ namespace Enemy {
             AI_FLAG_PLAY_WIN_ANIMATION_DURING_CUTSCENE = (1 << 3),
         };
 
-        AI(s32);
+        AI(bool);
         virtual ~AI();
         void init();
         void update();

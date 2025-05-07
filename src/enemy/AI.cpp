@@ -7,7 +7,7 @@
 
 namespace Enemy {
 
-AI::AI(s32 isBike) {
+AI::AI(bool isBike) {
     mpEngine = nullptr;
     mFlags = 0;
     mTeam = -1;
@@ -58,8 +58,8 @@ void AI::update() {
 
      * This is also the reason why Miis won't look at the camera when finishing some
      * competitions / tournaments, as said functionality is controlled by `AILookAt` as well.
-     * This function is also not called when playing Online matches, so characters won't look 
-     * at other racers there either, plus Miis won't look at the camera during Live Replay.
+     * This function is also not called when playing online matches, so characters won't look 
+     * at other racers there either, plus Miis won't look at the camera during Live View.
      * 
      * Characters are still able to look at course objects, though, since in those cases
      * it's the object's code the one that requests characters to look at them.

@@ -7,8 +7,8 @@ namespace Enemy {
 
     struct AIParamSpeed {
         f32 mSpeedAdvantage;
-        f32 speedBias;
-        f32 baseSpeed;
+        f32 mSpeedBias;
+        f32 mBaseSpeed;
     };
 
     struct AISpeedBase {

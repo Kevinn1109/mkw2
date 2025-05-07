@@ -28,7 +28,6 @@ namespace Enemy {
         AIPathPoint* field_0x14;
         s32 field_0x18;
         bool field_0x1C;
-        u8 field_0x1D[3];
         bool field_0x20;
         bool field_0x21;
         bool mbInBullet;

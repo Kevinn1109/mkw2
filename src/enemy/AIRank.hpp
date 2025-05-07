@@ -17,7 +17,7 @@ namespace Enemy {
         AIRankGroupBase* mpRankGroup;
         AISpeedBase* mpSpeed;
         s32 mId;
-        s32 mHumanPalyerInitialRank;
+        s32 mHumanPlayerInitialRank;
         s32 mHumanPlayerRank;   // The position rank of the human player at the start of the match - 1
         s32 targetRank;
         f32 field_0x1C;

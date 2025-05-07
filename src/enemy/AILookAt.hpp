@@ -12,7 +12,7 @@ namespace Enemy {
     };
 
     struct struct_101 {
-        AIInfo* mpAIInfo;
+        AIInfo* mpInfo;
         s32 field_0x04;
         s32 field_0x08;
         s32 field_0x0C;
@@ -33,7 +33,7 @@ namespace Enemy {
         Util::State<AILookAt> mStateInkApplied;
         Util::State<AILookAt> mStateDontLookAtCamera;
         Util::State<AILookAt> mStateLookAtCamera;
-        AIInfo* mpAIInfo;
+        AIInfo* mpInfo;
         AILookAtNextInfo* mpNextInfo;
         AI* mpLookAtTarget;
         u32 mTimeUntilStopLookingAtCamera;

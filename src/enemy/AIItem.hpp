@@ -16,7 +16,7 @@ namespace Enemy {
         Util::State<AIItemBase> mStateThrowBack;
         Util::State<AIItemBase> mStateHold;
         Util::State<AIItemBase> mStateGoal;
-        AIInfo* mpAIInfo;
+        AIInfo* mpInfo;
         s32 mItemHoldState;
         bool mbUseItem;
         bool mbIsTimeToHold;
@@ -30,7 +30,7 @@ namespace Enemy {
         };
     
         enum eItemThrowDirection {
-            DEFAULT = 0,
+            DEFAULT = 0,    // Throw an item with stick on neutral position
             THROW_FORWARDS = 1,
             THROW_BACKWARDS = 2
         };

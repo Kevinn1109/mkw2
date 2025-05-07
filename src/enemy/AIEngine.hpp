@@ -28,7 +28,7 @@ namespace Enemy {
         Util::State<AIEngine> mStateGhostIdle;
         Util::State<AIEngine> mStateAfterGoal;  // The racer will keep moving on goal
         Util::State<AIEngine> mStateStop;       // Used in Battles and Tournaments. The racer will stop moving on goal
-        AIInfo* mpAIInfo;
+        AIInfo* mpInfo;
         AIControlBase* mpControl;
         AISpeedBase* mpSpeed;
         AIItemBase* mpItem;
@@ -42,12 +42,12 @@ namespace Enemy {
         bool mbMatchEnded;
     };
 
-    struct AIEngineKart : public AIEngine {
+    struct AIEngineKart: public AIEngine {
         AIEngineKart(const AI&);
         ~AIEngineKart();
     };
 
-    struct AIEngineBike : public AIEngine {
+    struct AIEngineBike: public AIEngine {
         AIEngineBike(const AI&);
         ~AIEngineBike();
     };
