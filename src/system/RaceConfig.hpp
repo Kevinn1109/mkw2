@@ -57,9 +57,7 @@ public:
     Mii& getMii();
     const Type getPlayerType() const;
     // Same as above, but inlined. Needed for some functions to match
-    inline const Type getPlayerTypeInlined() const {
-      return mPlayerType;
-    }
+    inline const Type getPlayerTypeInlined() const { return mPlayerType; }
 
     BattleTeam getTeam();
     u8 getUnkPos();
@@ -197,9 +195,9 @@ public:
     const Player& getPlayer(u8 idx) const;
     Player& getPlayer(u8 idx);
     // Same as above, but inlined. Needed for some functions to match
-    inline Player& getPlayerInlined(u8 idx) {
-      return mPlayers[idx];
-    }
+    inline Player& getPlayerInlined(u8 idx) { return mPlayers[idx]; }
+    inline const Player::Type getPlayerType(u8 idx) const { return mPlayers[idx].getPlayerTypeInlined(); }
+    inline BattleTeam getPlayerTeam(u8 idx) { return mPlayers[idx].getTeam(); }
 
     inline bool isOnline(Settings::GameMode mode) {
       bool ret = false;
