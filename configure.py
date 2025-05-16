@@ -406,6 +406,8 @@ config.libs = [
             Object(Matching, "ui/MessageGroup.cpp"),
             Object(NonMatching, "ui/SectionAutogens.cpp"),
 
+            Object(Equivalent, "enemy/AI.cpp"),
+
             Object(Matching, "geo/BoxColManager.cpp"),
             Object(Matching, "geo/BoxColUnit.cpp"),
         ],

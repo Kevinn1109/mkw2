@@ -56,6 +56,7 @@ public:
     CharacterId getCharacter();
     Mii& getMii();
     const Type getPlayerType() const;
+
     BattleTeam getTeam();
     u8 getUnkPos();
     VehicleId getVehicle();
@@ -191,6 +192,8 @@ public:
     Settings::CameraMode getCameraMode();
     const Player& getPlayer(u8 idx) const;
     Player& getPlayer(u8 idx);
+    inline const Player::Type getPlayerType(u8 idx) const { return mPlayers[idx].mPlayerType; }
+    inline BattleTeam getPlayerTeam(u8 idx) { return mPlayers[idx].mTeam; }
 
     inline bool isOnline(Settings::GameMode mode) {
       bool ret = false;
