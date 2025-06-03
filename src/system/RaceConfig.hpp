@@ -68,6 +68,10 @@ public:
     void setUnkPos(s8 pos);
     void setVehicle(VehicleId vehicle);
 
+    inline bool isControlled() {
+      return mPlayerType != TYPE_CPU && mPlayerType != TYPE_REAL_ONLINE && mPlayerType != TYPE_NONE;
+    }
+
     unk8 _04;
     s8 mLocalPlayerNum;
     s8 mPlayerInputIdx;
@@ -216,6 +220,7 @@ public:
     CompetitionSettings mCompetitionSettings;
     RawGhostFile* mGhost;
   };
+  static_assert(sizeof(Scenario) == 0xbf0);
 
   RaceConfig();
   ~RaceConfig() override;

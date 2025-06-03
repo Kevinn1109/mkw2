@@ -4,6 +4,7 @@
 #include "BaseItemData.hpp"
 #include "ItemDirector.hpp"
 #include "gfx/GFXManager.hpp"
+#include "system/RaceConfig.hpp"
 
 namespace Item {
 
@@ -201,6 +202,21 @@ void ItemObj::onDespawn() {
 
 // 0x8079de34 - 0x8079dee0
 void ItemObj::loadFromRecvEvent(ItemType itemType, ItemRKNetEventItem *queueItem, bool isTrailHit, bool isDrop, u8 ownerId) {
+    typedef void (* recvItemInitFunc)(ItemRKNetEventItem*, ItemObj*, bool);
+    recvItemInitFunc func;
+    if (isTrailHit) {
+        func = &ItemRKNetEventItem::initTrailHitItem;
+    } else if (isDrop) {
+        func = &ItemRKNetEventItem::initDropItem;
+    } else {
+        func = ItemData::table[itemType].recvItemInitFunc;
+    }
+
+    this->ownerId = ownerId;
+    this->initialize(itemType);
+    func(queueItem, this, false);
+    this->spawn();
+    this->flags2 |= 1;
 }
 
 inline f32 min(f32 a, f32 b) {
@@ -287,6 +303,8 @@ void ItemObj::onOnlineShot() {
 
 // 0x8079e1f0 - 0x8079e220
 void ItemObj::onOnlineDrop() {
+    ItemObj::onOnlineShot();
+    this->drop();
 }
 
 // 0x8079e224 - 0x8079e2fc
@@ -312,6 +330,59 @@ void ItemObj::init(u16 id, u16 typeIndex, eItemType itemType) {
     this->drivableColInfo = this->colInfo.drivableColInfo;
 }
 
+// 0x8079e300 - 0x8079e388
+void ItemObj::initModel() {
+    if (this->mainModel) {
+        this->mainModel->setEnabled(false);
+    }
+    if (this->shadowModel) {
+        this->shadowModel->setEnabled(false);
+    }
+    if (this->lightModel) {
+        this->lightModel->setEnabled(false);
+    }
+}
+
+extern "C" u8*** lbl_1_bss_42D8;
+
+// 0x8079e38c - 0x8079e54c
+void ItemObj::spawn() {
+    if (this->lightModel) {
+        if ((this->flags & LIGHT_RING_ENABLED) == NONE) {
+            System::BattleTeam team = System::RaceConfig::spInstance->mRaceScenario.mPlayers[this->ownerId].mTeam;
+            this->lightModel->transformer->setAnimKeys(team != 0, 0.0, 1.0);
+            this->lightModel->transformer->setAnimKeys(2, 0.0, 1.0);
+
+            if (System::RaceConfig::spInstance->mRaceScenario.mSettings.mCameraMode != System::RaceConfig::Settings::CAMERA_MODE_LIVE_VIEW) {
+                int i = 0;
+                int hudCount = System::RaceConfig::spInstance->mRaceScenario.mHudCount;
+                for (; i < hudCount; i++){
+                    u8 playerId = lbl_1_bss_42D8[6][i][0x9c];
+                    if (team == System::RaceConfig::spInstance->mRaceScenario.mPlayers[playerId].mTeam) {
+                        this->lightModel->setFlagHByteBit(i);
+                    } else {
+                        this->lightModel->unsetFlagHByteBit(i);
+                    }
+                }
+
+                if (System::RaceConfig::spInstance->mRaceScenario.mHudCount == 4) {
+                    System::RaceConfig::Player * players = System::RaceConfig::spInstance->mRaceScenario.mPlayers;
+                    if (players[2].isControlled() && !players[3].isControlled()) {
+                        this->lightModel->unsetFlagHByteBit(3);
+                    }
+                }
+            }
+        } else {
+            int i = 0;
+            int hudCount = System::RaceConfig::spInstance->mRaceScenario.mHudCount;
+            for (; i < hudCount; i++){
+                this->lightModel->unsetFlagHByteBit(i);
+            }
+        }
+    }
+}
+
+// -----
 // 0x8079ec98 - 0x8079ed18
 void ItemObj::scaleHitbox(bool useRadius) {
     f32 scale;

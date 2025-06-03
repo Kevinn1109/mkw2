@@ -2,12 +2,12 @@
 
 #include <rk_types.h>
 
-#include "ItemObj.hpp"
 #include "system/CourseMap.hpp"
 
 extern "C" void getNormVector(EGG::Vector3f * out, EGG::Vector3f * in);
 namespace Item {
     class ItemObj;
+    class ItemRKNetEventItem;
     struct ItemData {
         static ItemData table[15];
 
@@ -51,7 +51,7 @@ namespace Item {
         typedef void (ItemObj::*TrailingObjUpdateFunc)(u32);
         typedef void (ItemObj::*RecvItemInitFunc)(void *, bool);
         ItemObj::UpdateFunc trailingObjUpdateFunc;
-        void (* recvItemInitFunc)(void *, void *, bool);
+        void (* recvItemInitFunc)(ItemRKNetEventItem*, ItemObj*, bool);
         u32 eventPacketSize;
         bool disableBoxCol;
         

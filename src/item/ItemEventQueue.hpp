@@ -5,7 +5,13 @@
 #include "egg/core/eggDisposer.hpp"
 
 namespace Item {
+    class ItemObj;
+
     struct ItemRKNetEventItem {
+        static void initTrailHitItem(ItemRKNetEventItem * queueItem, ItemObj * item, bool isOutgoing);
+        static void initDropItem(ItemRKNetEventItem * queueItem, ItemObj * item, bool isOutgoing);
+        static void initItem(ItemRKNetEventItem * queueItem, ItemObj * item, bool isOutgoing);
+
         u8 data[0x18];
         u32 objectId;
         u32 action;

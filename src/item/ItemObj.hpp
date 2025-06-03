@@ -114,6 +114,10 @@ namespace Item {
         virtual void onOnlineDrop();
 
         void init(u16 id, u16 typeIndex, eItemType itemType);
+        //initModel
+        void spawn();
+        void create(eItemType itemType, u8 ownerId, EGG::Vector3f position, bool fixedSpawnId);
+        void initialize(eItemType itemType);
 
         void scaleHitbox(bool useRadius);
         void fixScale();
@@ -122,6 +126,7 @@ namespace Item {
         // Placeholders:
         void initDefaultRenderer();
         void initRenderer(char *fileName, char *resName, char *shadowResName, int unk1, char **anims, int unk2, void* unk3, int unk4);
+        void drop();
     
         typedef void (ItemObj::*UpdateFunc)();
         typedef void (ItemObj::*BounceHitFunc)();
