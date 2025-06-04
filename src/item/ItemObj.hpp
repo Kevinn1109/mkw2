@@ -97,11 +97,12 @@ namespace Item {
         virtual void initModel();
         virtual void loadResources();
         virtual void updateModelSrt();
+        virtual void updateModelTranslation();
 
         ItemObj();
 
         void modelSetVisible(bool visible, bool disable);
-        void modelEnable();
+        virtual void modelEnable();
 
         virtual void onActivate();
 

@@ -500,7 +500,7 @@ void ItemObj::initialize(Item::eItemType itemType) {
 
     //TODO: Some big loop here
 
-    // this->modelEnable();
+    this->modelEnable();
     this->field52_0x184 = false;
 }
 
