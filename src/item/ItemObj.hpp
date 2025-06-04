@@ -17,7 +17,7 @@ namespace Render {
             u8 bytes[4];
         };
 
-        float * position;
+        EGG::Vector3f * position;
         float drawDistanceBack;
         float drawDistanceFwd;
         float playerDistances[4];
@@ -88,10 +88,15 @@ namespace Item {
         x40000000 = 0x40000000 /* 30 */
     } ItemObjFlags1;
 
+    inline ItemObjFlags1 operator|(ItemObjFlags1 a, ItemObjFlags1 b) {
+        return static_cast<ItemObjFlags1>(static_cast<int>(a) | static_cast<int>(b));
+    }
+
     class ItemObj {
     public:
         virtual void initModel();
         virtual void loadResources();
+        virtual void updateModelSrt();
 
         ItemObj();
 
@@ -127,6 +132,12 @@ namespace Item {
         void initDefaultRenderer();
         void initRenderer(char *fileName, char *resName, char *shadowResName, int unk1, char **anims, int unk2, void* unk3, int unk4);
         void drop();
+        
+        // Functions below are not part of this TU
+        u32 calcMetaData(bool fixedSpawnId);
+
+        void setScnMtxFromMtx(EGG::Matrix34f * mtxOut, f32 angle);
+        void setScnMtxFromQuat(EGG::Matrix34f * mtxOut);
     
         typedef void (ItemObj::*UpdateFunc)();
         typedef void (ItemObj::*BounceHitFunc)();
@@ -151,9 +162,9 @@ namespace Item {
         u32 updateRes; /* 0x4 = despawned, 0x8 = made stationary */
         ItemObjFlags1 flags; 
         unk32 flags2;
-        float posDraw[3]; /* Used by blue shell while high in the air */
-        float posStart[3]; /* Used during throw if flags2&8 */
-        float * positionPtr; /* Points to h20 mtx */
+        EGG::Vector3f posDraw; /* Used by blue shell while high in the air */
+        EGG::Vector3f posStart; /* Used during throw if flags2&8 */
+        EGG::Vector3f * positionPtr; /* Points to h20 mtx */
         Render::ModelDirector * mainModel;
         Render::ModelDirector * shadowModel;
         Render::ObjectRenderer * renderer;
@@ -162,8 +173,8 @@ namespace Item {
         BoxColUnit * boxColEntity;
         float hitboxHeight;
         float hitboxRadius;
-        Vec lastPosition;
-        Vec lastYRotation;
+        EGG::Vector3f lastPosition;
+        EGG::Vector3f lastYRotation;
 
         u32 curCollisionFlag;
         Field::ColInfo colInfo;

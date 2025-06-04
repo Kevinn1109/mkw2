@@ -434,9 +434,89 @@ void ItemObj::setScale(EGG::Vector3f * scale) {
     this->renderer->drawDistanceBack = this->hitboxRadius * drawDistBack;
 }
 
+// 0x8079e550 - 0x8079e5f0
+void ItemObj::create(Item::eItemType itemType, u8 ownerId, EGG::Vector3f position, bool fixedSpawnId) {
+    this->transform.t = position;
+    this->ownerId = ownerId;
+    this->trailOwnerId = 12;
+    this->initialize(itemType);
+    this->spawn();
+    ItemObj::updateModelSrt();
+    this->netIdentifier = this->calcMetaData(fixedSpawnId);
+}
+
+extern "C" bool onlineRace;
+
+// 0x8079e5f4 - 0x8079e880
+void ItemObj::initialize(Item::eItemType itemType) {
+    this->itemId = itemType;
+    this->updateRes = 0;
+    this->flags = NONE;
+    this->flags2 = 0;
+    this->field15_0x6e = 0;
+    this->field16_0x70 = 0;
+    this->scaleFactor = 0.0001f;
+    this->scale.set(0.0001f);
+    this->targetYScale = 0.0f;
+    this->hitboxHeight = 0.3f;
+    this->hitboxRadius = 0.3f;
+
+    resetCollisionEntries(this->curCollisionFlag);
+    this->colInfo.bboxLow.setZero();
+    this->colInfo.bboxHigh.setZero();
+    this->colInfo.movingFloorDist = -FLT_MIN;
+    this->colInfo.wallDist = -FLT_MIN;
+    this->colInfo.floorDist = -FLT_MIN;
+    this->colInfo.colPerpendicularity = 0.0f;
+    this->landCollisionFlag = 0;
+
+    this->vanishCountdown = 0;
+    this->someCounter = 5;
+    this->bounceHitFunc = NULL;
+    this->positionPtr = &this->transform.t;
+    this->renderer->position = &this->transform.t;
+    this->boxColEntity = NULL;
+    this->onlineTarget = 12;
+    this->netIdentifier = -1;
+    if (this->drivableColInfo) {
+        FUN_807bd7b4(this->drivableColInfo);
+    }
+
+    this->lastPosition = this->transform.t;
+    this->posDraw = this->transform.t;
+    this->posStart = this->transform.t;
+    this->transform.x.set(1.0f, 0.0f, 0.0f);
+    this->transform.y.set(0.0f, 1.0f, 0.0f);
+    this->transform.z.set(0.0f, 0.0f, 1.0f);
+
+    QuatFromRowVec34(&this->quaternion, &this->transform);
+
+    if (onlineRace) {
+        this->flags2 |= 0x20;
+    }
+    this->flags = this->flags | x20000;
+    this->lightSet = NULL;
+    this->flags2 &= ~0x8;
+
+    //TODO: Some big loop here
+
+    // this->modelEnable();
+    this->field52_0x184 = false;
+}
+
+
 //-------------------------------
 //Placeholders:
 //-------------------------------
+
+// 0x807a05d0 - 0x807a05f0
+void ItemObj::updateModelSrt() {
+    if (this->flags & x1000000) {
+        this->setScnMtxFromQuat(NULL);
+    } else {
+        this->setScnMtxFromMtx(NULL, 0.0f);
+    }
+}
 
 // void ItemObj::initDefaultRenderer() {
 // }
